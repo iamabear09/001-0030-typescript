@@ -1,2 +1,17 @@
-const name: string = 'test';
+import ChromeGrimpan from './ChromeGrimpan.js';
+import IEGrimpan from './IEGrimpan.js';
 
+function grimpanFactory(type: string) {
+    if (type === 'ie') {
+        return IEGrimpan.getInstance();
+    } else if (type === 'chrome') {
+        return ChromeGrimpan.getInstance();
+    } else if (type === 'safari') {
+        throw new Error('일치하는 type이 없습니다');
+    }
+}
+
+function main() {
+    grimpanFactory('ie');
+    grimpanFactory('chrome');
+}
