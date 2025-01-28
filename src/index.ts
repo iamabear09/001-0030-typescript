@@ -1,17 +1,25 @@
 import ChromeGrimpan from './ChromeGrimpan.js';
 import IEGrimpan from './IEGrimpan.js';
+import AbstractGrimpanFactory from "./AbstractGrimpanFactory";
 
-function grimpanFactory(type: string) {
-    if (type === 'ie') {
-        return IEGrimpan.getInstance();
-    } else if (type === 'chrome') {
+class ChromeGrimpanFactory extends AbstractGrimpanFactory {
+    static override createGrimpan(): ChromeGrimpan {
         return ChromeGrimpan.getInstance();
-    } else if (type === 'safari') {
-        throw new Error('일치하는 type이 없습니다');
     }
 }
 
-function main() {
-    grimpanFactory('ie');
-    grimpanFactory('chrome');
+class IEGrimpanFactory extends AbstractGrimpanFactory {
+    static override createGrimpan(): IEGrimpan {
+        return IEGrimpan.getInstance();
+    }
+}
+
+//TODO: typeof 가 필요한 이유는 뭐지...?
+function main( factory: typeof AbstractGrimpanFactory) {
+    const grimpan = factory.createGrimpan();
+    grimpan.initialize();
+    grimpan.initializeMenu();
+
+    // const chromeGrimpan = ChromeGrimpanFactory.createGrimpan();
+    // const ieGrimpan = IEGrimpanFactory.createGrimpan();
 }
