@@ -1,9 +1,9 @@
-import {ChromeGrimpanFactory} from "./GrimpanFactory";
+import {ChromeGrimpanFactory, GrimpanFactory} from "./GrimpanFactory";
 
-function main() {
-    const grimpan = ChromeGrimpanFactory.createGrimpan();
-    const grimpanMenu = ChromeGrimpanFactory.createGrimpanMenu(grimpan);
-    const grimpanHistory = ChromeGrimpanFactory.createGrimpanHistory(grimpan);
+function main(factory: typeof GrimpanFactory) {
+    const grimpan = factory.createGrimpan();
+    const grimpanMenu = factory.createGrimpanMenu(grimpan);
+    const grimpanHistory = factory.createGrimpanHistory(grimpan);
     grimpan.initialize();
     grimpanMenu.initialize();
     grimpanHistory.initialize();
