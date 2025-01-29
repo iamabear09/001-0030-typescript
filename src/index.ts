@@ -1,24 +1,10 @@
-import ChromeGrimpan from './ChromeGrimpan.js';
-import IEGrimpan from './IEGrimpan.js';
-import AbstractGrimpanFactory from "./AbstractGrimpanFactory";
+import {ChromeGrimpanFactory} from "./GrimpanFactory";
 
-class ChromeGrimpanFactory extends AbstractGrimpanFactory {
-    static override createGrimpan(): ChromeGrimpan {
-        return ChromeGrimpan.getInstance();
-    }
-}
-
-class IEGrimpanFactory extends AbstractGrimpanFactory {
-    static override createGrimpan(): IEGrimpan {
-        return IEGrimpan.getInstance();
-    }
-}
-
-//TODO: typeof 가 필요한 이유는 뭐지...?
-function main( factory: typeof AbstractGrimpanFactory) {
-    const grimpan = factory.createGrimpan();
+function main() {
+    const grimpan = ChromeGrimpanFactory.createGrimpan();
+    const grimpanMenu = ChromeGrimpanFactory.createGrimpanMenu(grimpan);
     grimpan.initialize();
-    grimpan.initializeMenu();
+    grimpanMenu.initialize();
 
     // const chromeGrimpan = ChromeGrimpanFactory.createGrimpan();
     // const ieGrimpan = IEGrimpanFactory.createGrimpan();
